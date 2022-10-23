@@ -25,11 +25,11 @@ The first field has one pawn on it at a time and it is known which pawn is on it
 ## This method has been replaced with the following
 
 it can be GET or POST
-        [GET/POST] `/api/v1/check/{current-field}`
+        [GET/POST] /api/v1/check/{current-field}
 
 method of moving pawns
 
-        [GET/POST] `/api/v1/{current-field}/{destination-field}`
+        [GET/POST] /api/v1/{current-field}/{destination-field}
 
 
 ## TUTORIAL
@@ -39,15 +39,15 @@ method of moving pawns
 make sure you have the necessary modules
 in the path where app.py is, execute the following command
 
-    `pip install -r requirements.txt`
+    pip install -r requirements.txt
 if you have all modules, you can run the application
 
-    `python app.py [port]`
+    python app.py [port]
 #####example:
-    `python app.py 8080`
+    python app.py 8080
 **or**
     
-    `python app.py`
+    python app.py
 
 when we do not specify the port, the default will be ** 5000 **
 
@@ -68,7 +68,7 @@ the easiest way to start the game is in the browser
 
 server response after the command:
 
-     `python app.py 8080`
+     python app.py 8080
 ![odpowiedź](./img/startresponse.JPG)]
 
 ## 2. open a browser
@@ -83,7 +83,7 @@ as you can see, we have two options, we can use it ** from b2 to b3 or b4 **
 
 ## 4. Use this pawn to move to the b4 field
 
-    `localhost:8080/api/v1/b2/b4`
+    localhost:8080/api/v1/b2/b4
 
 ![przejdź](./img/move.JPG)]
 
@@ -105,13 +105,13 @@ traffic not allowed and response 409
 
 ** let's check what options we have **
     
-    `localhost:8080/api/v1/check/f7`
+    localhost:8080/api/v1/check/f7
 
 ![checkf7](./img/odpf7.JPG)]
 
 **> move it to f6 **
 
-`localhost:8080/api/v1/f7/f6`
+        localhost:8080/api/v1/f7/f6
 
 ![validf6](./img/validf6.JPG)]
 
