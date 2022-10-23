@@ -1,6 +1,6 @@
 # REST Chess solver
 
-## Informacje dotyczące projektu
+## Project information
 
 * Python 3.10
 * Black (formatowanie)
@@ -8,26 +8,26 @@
 * Flask 1.0+
 * Dozwolone jest używanie zewnętrznych bibliotek - chess
 
-## Aby ukninąć przysłowiowego ponownego wynajdywania koła, wykorzystano bibliotekę chess
+## The chess library was used to conceal the proverbial rediscovery of the wheel
 
-kolejnym powodem dla którego nie wynajdywałem gry w szachy od nowa było to, że **nie potrafię grać w szachy**
+Another reason I didn't reinvent the game was because ** I can't play chess **
 
-## Uwagi!
+## Remarks!
 
-    [GET] `/api/v1/{chess-figure}/{current-field}` (wyświetla listę możliwych ruchów)
+
+[GET] `/api/v1/{chess-figure}/{current-field}` (wyświetla listę możliwych ruchów)
 ten sposób walidacji możliwych ruchów nie jest dobry z paru powodów:
 
-1. co jeżeli pionka nie ma na wybranym polu
-1. skoro mamy stworzoną planszę to po co wybierać pionka skoro pionek przynależy do pola
-1. pole ma w jednym momencie na sobie jednego pionka i wiadomo który pionek na nim stoi
+1. what if the pawn is not on the chosen field
+1. since we have a board created, why choose a pawn if the pawn belongs to the field
+The first field has one pawn on it at a time and it is known which pawn is on it
 
-## Tą metodę zastąpiono następującą
+## This method has been replaced with the following
 
-może być GET albo POST
-
+it can be GET or POST
         [GET/POST] `/api/v1/check/{current-field}`
 
-metoda poruszania się pionkami
+method of moving pawns
 
         [GET/POST] `/api/v1/{current-field}/{destination-field}`
 
@@ -36,95 +36,95 @@ metoda poruszania się pionkami
 
 ### WINDOWS
 
-upewnij się że posiadasz potrzebne moduły
-w scieżce gdzie znajduję się app.py wykonaj następujące polecenie
+make sure you have the necessary modules
+in the path where app.py is, execute the following command
 
-    pip install -r requirements.txt
-jeżeli posiadasz wszystkie moduły możesz uruchomić aplikację
+    `pip install -r requirements.txt`
+if you have all modules, you can run the application
 
-    python app.py [port]
-#####przykład:
-    python app.py 8080
-**lub**
+    `python app.py [port]`
+#####example:
+    `python app.py 8080`
+**or**
     
-    python app.py
+    `python app.py`
 
-kiedy nie podamy portu domyślnie będzie to **5000**
+when we do not specify the port, the default will be ** 5000 **
 
-## obowiązująca szachownica
+## valid checkerboard
 
 ![szachownica](./img/szachownica.jpg)]
 
-## ułożenie pionków
+## arranging the pawns
 
 ![ułożenie pionków](./img/szachownica2.JPG)]
 
-## jak grać?
+## how to play?
 
-uruchomienie aplikacji, rozpoczyna rozgrywkę, zasady są takie same jak  w szachach
-najłatwiej rozpocząć gre w przeglądarce
+launching the application starts the game, the rules are the same as in chess
+the easiest way to start the game is in the browser
 
-## 1. rozpocznij
+## 1. get started
 
-odpowiedź serwera po komendzie:
+server response after the command:
 
-     python app.py 8080
+     `python app.py 8080`
 ![odpowiedź](./img/startresponse.JPG)]
 
-## 2. otwórz przeglądarkę
+## 2. open a browser
 
-## 3. sprawdź gdzie możesz poruszyć pionka z pozycji b2
+## 3. check where you can move the pawn from position b2
 
     localhost:8080/api/v1/check/b2
 
 ![walidacja](./img/avaliablemoves.JPG)]
 
-jak widać mamy dwie opcje możemy nim przejść **z pola b2 na b3 albo b4**
+as you can see, we have two options, we can use it ** from b2 to b3 or b4 **
 
-## 4. przejdź tym pionkiem na pole b4
+## 4. Use this pawn to move to the b4 field
 
-    localhost:8080/api/v1/b2/b4
+    `localhost:8080/api/v1/b2/b4`
 
 ![przejdź](./img/move.JPG)]
 
-udało się poruszyć na konsoli wyświetlił się również podgląd szachownicy
+you managed to move, the chessboard preview was also displayed on the console
 
 ![podgląd](./img/konsola_odp.JPG)]
 
-spróbujmy ruszyć teraz tym samym pionkiem drugi raz co nie jest dozwolone
+let's try to move the same pawn a second time now, which is not allowed
 
     localhost:8080/api/v1/b4/b5
 
 ![podgląd](./img/conflict.JPG)]
 
-wyświetla się komunikat o nie dozwolnych ruchu i response 409
+traffic not allowed and response 409
 
 ![podgląd](./img/illegalmove.JPG)]
 
-## 5. ruch drugiego gracza pionem z f7
+## 5. move the second player with a pawn with f7
 
-**sprawdźmy jakie mamy opcje**
+** let's check what options we have **
     
-    localhost:8080/api/v1/check/f7
+    `localhost:8080/api/v1/check/f7`
 
 ![checkf7](./img/odpf7.JPG)]
 
-**> rusz nim na f6**
+**> move it to f6 **
 
-localhost:8080/api/v1/f7/f6
+`localhost:8080/api/v1/f7/f6`
 
 ![validf6](./img/validf6.JPG)]
 
-**oraz podgląd na stan gry w konsoli**
+** and a preview of the game status in the console **
 
 ![validf6](./img/valid_movef6.JPG)]
 
-## co sie wydarzy jak wybierzemy pole na którym nie ma pionka ?
+## what will happen if we choose a field with no pawn?
 
 ![notfound](./img/notfound.JPG)]
 
 ![console404](./img/console404.JPG)]
 
 
-## kontakt
+## contact
 **natanlisowski@gmail.com**
