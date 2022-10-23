@@ -1,40 +1,40 @@
 from flask import Flask, request, abort
-import Rest_chess_solver
-import json
+from Rest_chess_solver import ApiFields, GameOfChess, Msg
 import sys
 
-chess_solver = Rest_chess_solver.GameOfChess()
+C_POST = "POST"
+C_GET = "GET"
+C_CHECK_API = "/api/v1/check/<current_field>"
+C_MOVE_API = "/api/v1/<current_field>/<dest_field>"
+
+chess_solver = GameOfChess()
 app = Flask(__name__)
 
 
-@app.route("/api/v1/check/<current_field>", methods=["GET", "POST"])
+@app.route(C_CHECK_API, methods=[C_GET, C_POST])
 def check(current_field):
-    if request.method == "POST" or request.method == "GET":
-        chess_solver.list_available_moves(current_field)
-        with open("avaliable_moves.json", "r") as f:
-            data = json.load(f)
+    if request.method == C_POST or request.method == C_GET:
+        data = chess_solver.list_available_moves(current_field)
 
-        match data["error"]:
-            case "There is no figure on field chosen by you.":
+        match data[ApiFields.ERROR]:
+            case Msg.ON_EMPTY_FIELD_SELECTED:
                 return abort(404, data)
-            case "none":
+            case Msg.NONEMSG:
                 return data
 
 
-@app.route("/api/v1/<current_field>/<dest_field>", methods=["GET", "POST"])
+@app.route(C_MOVE_API, methods=[C_GET, C_POST])
 def index(current_field, dest_field):
-    if request.method == "POST" or request.method == "GET":
+    if request.method == C_POST or request.method == C_GET:
 
-        chess_solver.move(current_field, dest_field)
-        with open("answer.json", "r") as f:
-            data = json.load(f)
+        data = chess_solver.move(current_field, dest_field)
 
-        match data["error"]:
-            case "there is no figure on field, field is empty":
+        match data[ApiFields.ERROR]:
+            case Msg.ON_ERROR_NO_FIGURE_ON_FIELD:
                 return abort(404, data)
-            case "none":
+            case Msg.NONEMSG:
                 return data
-            case "Current move is not permitted.":
+            case Msg.NOT_PERMITTED:
                 return abort(409, data)
 
 
