@@ -6,7 +6,7 @@
 * Black (formatting)
 * Flake8 (linter)
 * Flask 1.0+
-* Dozwolone jest używanie zewnętrznych bibliotek - chess
+* chess
 
 ## The chess library was used to conceal the proverbial rediscovery of the wheel
 
