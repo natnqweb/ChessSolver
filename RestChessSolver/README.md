@@ -3,7 +3,7 @@
 ## Project information
 
 * Python 3.10
-* Black (formatowanie)
+* Black (formatting)
 * Flake8 (linter)
 * Flask 1.0+
 * Dozwolone jest używanie zewnętrznych bibliotek - chess
@@ -15,8 +15,8 @@ Another reason I didn't reinvent the game was because ** I can't play chess **
 ## Remarks!
 
 
-[GET] `/api/v1/{chess-figure}/{current-field}` (wyświetla listę możliwych ruchów)
-ten sposób walidacji możliwych ruchów nie jest dobry z paru powodów:
+[GET] `/api/v1/{chess-figure}/{current-field}` (displays a list of possible moves)
+this way of validating possible moves is not good for several reasons:
 
 1. what if the pawn is not on the chosen field
 1. since we have a board created, why choose a pawn if the pawn belongs to the field
